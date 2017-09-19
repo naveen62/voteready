@@ -4,7 +4,7 @@
         <h1 style="text-align:center"><%= polls.poll %></h1>
          <h4 style="text-align:center">Submitted <%= polls.author.username %></h4>
         <div class="media">
-            <div class="col-lg-4 col-sm-12">
+            <div id="#votecheck" class="col-lg-4 col-sm-12">
           <form action="/polls/<%= polls._id %>" method="POST">
             <% polls.option.forEach(function(vot) { %> 
                <div class="form-group">
@@ -98,6 +98,7 @@ newCmt.addEventListener('click', function() {
                 return false;
                });
         alert('You have already voted');
+        location.reload();
      })
     }
     var ctx = document.getElementById("myChart").getContext('2d');
