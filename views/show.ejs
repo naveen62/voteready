@@ -64,6 +64,11 @@
 </div>
 </div>
 <script type="text/javascript">
+var cmt = document.querySelector('#cmt');
+var newCmt = document.querySelector('#newCmt');
+newCmt.addEventListener('click', function() {
+    cmt.style.display = 'block'
+});
    var data = [];
    <% polls.option.forEach(function(vot) { %>
            data.push("<%= vot.text %>");
@@ -132,10 +137,6 @@ var myChart = new Chart(ctx, {
         }
     }
 });
-var cmt = document.querySelector('#cmt');
-var newCmt = document.querySelector('#newCmt');
-newCmt.addEventListener('click', function() {
-    cmt.style.display = 'block'
-});
+
 </script>
 <% include ./partials/footer %>
