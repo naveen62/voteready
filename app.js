@@ -15,7 +15,8 @@ var Comment = require("./models/comment")
 //mac address config
 
 // mongoose configs
-mongoose.connect("mongodb://localhost/voting_app", {useMongoClient: true});
+// mongoose.connect("mongodb://localhost/voting_app", {useMongoClient: true});
+mongoose.connect("mongodb://naveen:nyg201yy@ds143744.mlab.com:43744/voteready", {useMongoClient: true});
 mongoose.Promise = global.Promise;
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
