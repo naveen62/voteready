@@ -1,0 +1,17 @@
+<% include ./partials/header %>
+<div class="homeAndmy">
+    <center>
+        <h1>Dashboard</h1>
+    </center>
+</div>
+<div class='polls'>
+<div class='container'>
+    <div class='list-group'>
+        <% polls.forEach(function(pol) { %>
+          <a href='/polls/<%= pol._id %>' class='list-group-item'><h4><%= pol.poll %></h4></a>  
+        <% }) %>
+    </div>
+</div>
+</div>
+<% include ./partials/footer %> 
+

@@ -1,0 +1,59 @@
+.home {
+    padding-top: 60px;
+    color: white;
+    height: 40vh;
+    background-color: #044F67;
+}
+.media {
+    display: flex;
+    justify-content: center;
+}
+@media only screen and (max-width: 500px) {
+    .media {
+        display: block;
+        justify-content: inherit;
+        width: 100%;
+    }
+}
+ul {
+    list-style: none;
+}
+.polls {
+    margin-top: 15px;
+}
+.homeAndmy {
+    padding-top: 60px;
+    color: white;
+    height: 40vh;
+    background-color: #044F67;
+}
+.homeAndmy center h1 {
+    font-size: 100px;
+} 
+@media only screen and (max-width: 500px) {
+ .homeAndmy center h1 {
+    font-size: 50px;
+} 
+}
+.nsize {
+    font-size: 15px;
+}
+.navbar-default {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+a.list-group-item:hover {
+    background-color: #044F67;
+    color: white;
+}
+#del {
+    margin-top: 10px;
+}
+#cmt {
+    margin-top: 8px;
+    display: none;
+    
+}
+#flash {
+ text-align: center;
+}

@@ -1,0 +1,34 @@
+<% include ./partails/header %>
+ <div class="container">
+    <div class="row">
+        <h1 style="text-align:center">New Poll</h1>
+        <div class="media">
+            <div class="col-lg-4 col-sm-12">
+          <form action="/polls/new" method="POST">
+               <h4>Enter the poll</h4>
+               <span id='add'>
+               <div class="form-group">
+                   <input class="form-control" type="text" name="voting[poll]" placeholder="best javascript framework"></input>
+               </div>
+               <h4>Enter choices</h4>
+                <div class="form-group">
+                   <input class="form-control" type="text" name="voting[0].[text]" placeholder='options...'></input>
+               </div>
+               <div class="form-group">
+                <input class="form-control" type="text" name="voting[1].[text]" placeholder="options..."></input>
+                </div>
+                </span>
+                <div class='form-group' class="adj1">
+                <input type='button' value='Add choice'class="btn btn-lg btn-success btn-block"></input>    
+                </div>
+                <div class="form-group" class='adj1'>
+                <button class="btn btn-lg btn-success btn-block" id="check">Submit</button>
+                </div>
+        </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/javascript/new.js"></script>
+<% include ./partails/footer %>
+

@@ -1,0 +1,141 @@
+<% include ./partials/header %>
+<div class="container">
+    <div class="row">
+        <h1 style="text-align:center"><%= polls.poll %></h1>
+         <h4 style="text-align:center">Submitted <%= polls.author.username %></h4>
+        <div class="media">
+            <div class="col-lg-4 col-sm-12">
+          <form action="/polls/<%= polls._id %>" method="POST">
+            <% polls.option.forEach(function(vot) { %> 
+               <div class="form-group">
+                  <div class="input-group">
+                      <span class="input-group-addon">
+                        <input type="radio" name="choice" value="<%= vot.text %>" aria-label="..." required>
+                      </span>
+                      <input type="text" class="form-control" value="<%= vot.text %>" aria-label="..." disabled>
+                    </div><!-- /input-group -->
+               </div>
+             <% }) %>
+             <button id='disable' class='btn btn-lg btn-primary btn-block'>Vote</button>
+        </form>
+        <% if(currentUser && polls.author.id.equals(currentUser._id)) { %>
+        <form action='/polls/<%=polls._id%>/del?_method=DELETE' method='POST'>
+            <div id='del'>
+            <button class='btn btn-lg btn-danger btn-block'>Delete</button>
+            </div>
+        </form>
+            <% } %>
+            </div>
+        </div>
+    </div>
+    <canvas id="myChart"></canvas>
+    <div class="panel panel-default">
+      <div class="panel-body">
+           <div class='text-right'>
+               <a id='newCmt' class='btn btn-primary'>Add new comment</a>
+           </div>
+           <div class='row'>
+        <div class="col-lg-12">
+<form id='cmt' action="/polls/<%= polls._id %>/cmt" method='POST'>
+   <div class='form-group'>                
+    <div class="input-group">
+      <input type="text" class="form-control" name='comment[text]' placeholder="Enter comment" required>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit">Add</button>
+      </span>
+    </div><!-- /input-group -->
+    </div>
+</form>
+   <div>
+       <hr>
+       <div>
+       <% polls.comments.forEach(function(comment) { %>
+           <strong><%=comment.author.username %></stroung>
+           <span class='pull-right'><%=comment.created%></span>
+           <p>
+               <%= comment.text %>
+           </p>
+       <% }) %>
+       </div>
+   </div>
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->   
+  </div>
+</div>
+</div>
+<script type="text/javascript">
+   var data = [];
+   <% polls.option.forEach(function(vot) { %>
+           data.push("<%= vot.text %>");
+       <% })  %>
+    console.log(data);
+    var votes = []
+    <% polls.option.forEach(function(vote) { %>
+        votes.push(<%= vote.vote %>);
+    <% }) %>
+    var ips = []
+    <% polls.ips.forEach(function(ip) { %>
+        ips.push("<%= ip %>");
+    <% }) %>
+    var voted = "<%=voted %>"
+    var checkVote = [];
+    <% for(var i=0; i<(polls.ips).length; i++){ %>
+        <% if(polls.ips[i] == voted) { %>
+            checkVote.push("<%= polls.ips[i] %>")
+    <% } %>
+    <% } %>
+    console.log(ips)
+    console.log(voted);
+    console.log(checkVote);
+      if(checkVote[0]) {
+         $("#disable").on('click', function() {
+             $("form").submit(function(e){
+                return false;
+               });
+        alert('You have already voted');
+     })
+    }
+    var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: data,
+        datasets: [{
+            label: '# of Votes',
+            data: votes,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+var cmt = document.querySelector('#cmt');
+var newCmt = document.querySelector('#newCmt');
+newCmt.addEventListener('click', function() {
+    cmt.style.display = 'block'
+});
+</script>
+<% include ./partials/footer %>
