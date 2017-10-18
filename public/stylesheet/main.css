@@ -57,3 +57,7 @@ a.list-group-item:hover {
 #flash {
  text-align: center;
 }
+#nav {
+    display: inline;
+    float: left;
+}

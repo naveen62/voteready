@@ -15,8 +15,7 @@ var Comment = require("./models/comment")
 //mac address config
 
 // mongoose configs
-// mongoose.connect("mongodb://localhost/voting_app", {useMongoClient: true});
-mongoose.connect("mongodb://naveen:nyg201yy@ds143744.mlab.com:43744/voteready", {useMongoClient: true});
+mongoose.connect("mongodb://localhost/voting_app", {useMongoClient: true});
 mongoose.Promise = global.Promise;
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -86,6 +85,7 @@ app.post("/polls/new",isLoggedin,function(req, res) {
     polling.option.forEach(function(opt) {
         opt.vote = 0;
     })
+    console.log('testing voting', req.body.voting)
     console.log(polling);
     Poll.create(polling, function(err, poll) {
         if(err) {
